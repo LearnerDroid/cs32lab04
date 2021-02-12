@@ -6,16 +6,15 @@
 
 
 void comboHospitalData::addHospitaltoRegion(shared_ptr<hospitalData> HI) {
-	if (counties.size() == 0) {
-		type = HI->type;
-	}
-	overallrate = overallrate * counties.size() + HI->overallrate;
-	mortality = mortality * counties.size() + HI->overallrate;
-	readmit *= counties.size();
-	readmit += HI->readmit;
-
 	counties.push_back(HI);
-	overallrate /= counties.size();
-	mortality /= counties.size();
-	readmit /= counties.size();
+	if (HI->getOverallRate() < 0)
+		return;
+	setOverallRate(getOverallRate() * numHosp + HI->getOverallRate());
+	setMortality(getMortality() * numHosp + HI->getOverallRate());
+	setReadmit(getReadmit() * numHosp + HI->getOverallRate());
+
+	numHosp++;
+	setOverallRate(getOverallRate() / numHosp);
+	setMortality(getMortality() / numHosp);
+	setReadmit(getReadmit() / numHosp);
 }

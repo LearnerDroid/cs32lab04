@@ -16,27 +16,38 @@ using namespace std;
 class hospitalData : public placeData{
   public:
 	 //constructor for starting code - make complete by adding rating
-    hospitalData(string inN, string inS, string inType) :
-            placeData(inN), state(inS), type(inType), overallrate(-1), mortality(-1), readmit(-1) {}
-    hospitalData(string inN, string inS, string inType, int o, rating m, rating r) :
-            placeData(inN), state(inS), type(inType), overallrate(o), mortality(m), readmit(r){
-    }
-    hospitalData(hospitalData& h) : placeData(h.name), state(h.state), type(h.type), overallrate(h.overallrate), mortality(h.mortality), readmit(h.readmit) {}
-    hospitalData(string name, string st) : placeData(name), state(st), type("region"), overallrate(0), mortality(), readmit() {}
-    //string getName() const { return name; }
+    hospitalData(string inN, string inC, string inS, string inType) :
+            placeData(inN), city(inC), state(inS), type(inType), overallrate(0), mortality(), readmit() {}
+    hospitalData(string inN, string inC, string inS, string inType, double o, rating m, rating r) :
+            placeData(inN), city(inC), state(inS), type(inType), overallrate(o), mortality(m), readmit(r){}
+    hospitalData(hospitalData& h) : placeData(h.getName()), state(h.state), type(h.type), overallrate(h.overallrate), mortality(h.mortality), readmit(h.readmit) {}
+    hospitalData(string inS) : placeData(), state(inS), type(""), overallrate(0), mortality(0), readmit(0) {}
+    
+    string getCity() const { return city; }
     string getState() const { return state; }
     string getType() const { return type; }
-    int getOverallRate() const { return overallrate; }
-    rating getMortality() const { return mortality; }
-    rating getReadmit() const { return readmit; }
+    double getOverallRate() const { return overallrate; }
+    rating getMortality() { return mortality; }
+    rating getReadmit() { return readmit; }
 
-   friend std::ostream& operator<<(std::ostream &out, const hospitalData &HD);
+    void setOverallRate(double i) { overallrate = i; }
+    void setMortality(rating r) { mortality = r; }
+    void setReadmit(rating r) { readmit = r; }
+
+    static bool compareOV(hospitalData* ph1, hospitalData* ph2) {
+        if (ph1->overallrate == ph2->overallrate)
+            return ph1->getName().compare(ph2->getName());
+        return ph1->overallrate < ph2->overallrate;
+    }
+
+    friend ostream& operator<<(ostream &out, hospitalData &HD);
 
 
-    //const string name;
+private:
+    string city;
     string state;
     string type;
-    int overallrate;
+    double overallrate;
     rating mortality;
     rating readmit;
 

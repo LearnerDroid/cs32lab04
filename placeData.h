@@ -10,7 +10,7 @@ using namespace std;
 class placeData {
 public:
 	placeData(string n) : name(n) {}
-	string name;
+	placeData() : name("") {}
 	string getName() {
 		return name;
 	}
@@ -18,5 +18,8 @@ public:
 		out << "County Demographics Info: " << DD.name;
         return out;
     }
+
+private:
+	string name;
 };
 #endif

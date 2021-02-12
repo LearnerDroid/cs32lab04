@@ -17,13 +17,14 @@ cout << "Testing hospital sort..." << endl;
     //create the state hospital data
     theAnswers.createStateHospData((std::vector<shared_ptr<hospitalData>>&)theHospitalData);
 
-    std::vector<comboHospitalData*> hospHighToLow;
-    theAnswers.sortHospRatingHighLow((std::vector<comboHospitalData *>& )hospHighToLow, "state");
+    std::vector<comboHospitalData*> hospLowToHigh;
+    theAnswers.sortHospRatingLowHigh((std::vector<comboHospitalData *>& )hospLowToHigh, "state");
+
 
   // Test case #1
-  string topHosp[] {"WI", "SD", "UT", "HI", "ID"};
+  string lowHosp[] {"DC", "NY", "NV", "VI", "FL"};
   for (int i=0; i < 5; i++) {
-  	ASSERT_EQUALS(topHosp[i], hospHighToLow.at(i)->getState());
+  	ASSERT_EQUALS(lowHosp[i], hospLowToHigh.at(i)->getState());
   }
 
   return 0;

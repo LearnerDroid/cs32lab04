@@ -27,6 +27,13 @@ string getField(std::stringstream &ss) {
     return stripQuotes(data);
 }
 
+string getFieldNQ(std::stringstream& ss) {
+    string temp;
+    std::getline(ss, temp, ',');
+    //std::cout << temp << std:: endl;
+    return temp;
+}
+
 /* helper: read out column names for CSV file */
 void consumeColumnNames(std::ifstream &myFile) {
     std::string line;
@@ -90,8 +97,7 @@ std::vector<shared_ptr<placeData> > read_csv(std::string filename, typeFlag file
     std::vector<shared_ptr<placeData> > theData;
 
     // Create an input filestream
-    std::ifstream myFile;
-    myFile.open(filename);
+    std::ifstream myFile(filename);
 
     // Make sure the file is open
     if(!myFile.is_open()) {
@@ -153,7 +159,7 @@ shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     rating *m = new rating(mortality);
     rating *r = new rating(readmission);
 
-    return make_shared<hospitalData>(name, state, type, o, *m, *r);
+    return make_shared<cityHospitalData>(name, city, state, type, o, *m, *r);
 }
 
 //read from a CSV file (for a given data type) return a vector of the 

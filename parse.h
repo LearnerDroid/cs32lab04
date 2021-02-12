@@ -9,6 +9,7 @@
 #include <sstream> // std::stringstream
 #include "demogData.h"
 #include "hospitalData.h"
+#include "cityHospitalData.h"
 
 /*static functions to help parse CSV data */
 
@@ -25,6 +26,7 @@ string stripQuotes(std::string temp) ;
 /* helper: get field from string stream */
 /* assume field has quotes for CORGIS */
 string getField(std::stringstream &ss);
+string getFieldNQ(std::stringstream& ss);
 
 /* helper: read out column names for CSV file */
 void consumeColumnNames(std::ifstream &myFile);

@@ -14,12 +14,19 @@ using namespace std;
 */
 class comboHospitalData : public hospitalData {
 public:
-	comboHospitalData(string r, string s) : hospitalData(r, s) {}
+	comboHospitalData(string r, string s) : hospitalData(s), region(r), numHosp(0) {}
 	void addHospitaltoRegion(shared_ptr<hospitalData> HI);
 	string getRegion() {
-		return name;
+		return region;
 	}
-	static bool compareOV(comboHospitalData* ph1, comboHospitalData* ph2) { return ph1->overallrate < ph2->overallrate; }
+	double getNumHosp() {
+		return numHosp;
+	}
+	vector<shared_ptr<hospitalData>> getCounties() { return counties; }
+
+private:
 	vector<shared_ptr<hospitalData>> counties;
+	string region;
+	double numHosp;
 };
 #endif

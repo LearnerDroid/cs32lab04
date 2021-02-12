@@ -15,7 +15,8 @@ Rating.Safety   String  Above, Same, Below, or Unknown comparison to national ho
 */
 class rating {
   public:
-    rating() : inR(-1) {}
+      //default is 0
+    rating() : inR(0) {}
     rating(double inRating) {
         update(inRating);
     }
@@ -29,47 +30,20 @@ class rating {
     }
 
     const string getRating() const { return inRS; }
+    void setRating(double d) { inR = d; update(d); }
+    void setRating(string s) { inRS = s; update(s); }
+    void setRating(rating r) { inR = r.getRatingNum(); inRS = r.getRating(); }
     double getRatingNum() const { return inR; }
 
-    rating& operator*=(const double Sc) {
-        inR *= Sc;
-        return *this;
-    }
-
-    rating& operator*(const double Sc) {
-        inR *= Sc;
-        return *this;
-    }
-
-    rating& operator/=(const double Sc) {
-        inR /= Sc;
-        return *this;
-    }
-
-    /* implement other operators for example, maybe... */
-    rating& operator/(const int Sc) {
-        inR /= Sc;
-        return *this;
-    }
-
-    rating& operator+=(const rating r) {
-        inR += r.inR;
-        return *this;
-    }
-
-    rating& operator+(const double Sc) {
-        inR += Sc;
-        return *this;
-    }
-
-    rating& operator+=(const double Sc) {
-        inR += Sc;
-        return *this;
-    }
-    
-    bool operator < (const rating& r) {
-        return this->getRatingNum() < r.getRatingNum();
-    }
+    rating& operator=(const double Sc) { inR = Sc; return *this; }
+    rating& operator*=(const double Sc) { inR *= Sc; return *this; }
+    rating& operator*(const double Sc) { inR *= Sc; return *this; }
+    rating& operator/=(const double Sc) { inR /= Sc; return *this; }
+    rating& operator/(const int Sc) { inR /= Sc; return *this; }
+    rating& operator+=(const rating r) { inR += r.inR; return *this; }
+    rating& operator+(const double Sc) { inR += Sc; return *this; }
+    rating& operator+=(const double Sc) { inR += Sc; return *this; }
+    bool operator < (const rating& r) { return this->getRatingNum() < r.getRatingNum(); }
     
     void update(string inRating){
         inRS = inRating;
@@ -94,6 +68,7 @@ class rating {
         else
             inRS = "Above";
     }
+    friend ostream& operator<<(ostream& out, const rating &r);
 private:
     double inR;
     string inRS; //string version of rating

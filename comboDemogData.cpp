@@ -7,20 +7,12 @@
 
 
 void comboDemogData::addDemogtoRegion(shared_ptr<demogData> CD) {
-	popOver65 = popOver65 * totalPop + CD->popOver65 * CD->totalPop;
-	popUnder18 = popUnder18 * totalPop + CD->popUnder18 * CD->totalPop;
-	popUnder5 = popUnder5* totalPop + CD->popUnder5 * CD->totalPop;
-	percentUndergraduate = percentUndergraduate * totalPop + CD->percentUndergraduate * CD->totalPop;
-	percentHighSchool = percentHighSchool * totalPop + CD->percentHighSchool * CD->totalPop;
-	belowPoverty = belowPoverty * totalPop + CD->belowPoverty * CD->totalPop;
-
-	totalPop += CD->totalPop;
-	popOver65 /= totalPop;
-	popUnder18 /= totalPop;
-	popUnder5 /= totalPop;
-	percentUndergraduate /= totalPop;
-	percentHighSchool /= totalPop;
-	belowPoverty /= totalPop;
-
+	setpopOver65(getpopOver65() + CD->getpopOver65());
+	setpopUnder18(getpopUnder18() + CD->getpopUnder18());
+	setpopUnder5(getpopUnder5() + CD->getpopUnder5());
+	setBAup(getBAup() + CD->getBAup());
+	setHSup(getHSup() + CD->getHSup());
+	setBelowPoverty(getBelowPoverty() + CD->getBelowPoverty());
+	setTotalPop(getTotalPop() + CD->getTotalPop());
 	counties.push_back(CD);
 }
